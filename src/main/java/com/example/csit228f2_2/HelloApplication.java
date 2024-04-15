@@ -24,22 +24,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelloApplication extends Application {
-    public static List<User> users;
     public static void main(String[] args) {
         launch();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        users = new ArrayList<>();
-        // LOAD USERS
-        users.add(new User("tsgtest", "123456"));
-        users.add(new User("jayvince", "secret"));
-        users.add(new User("russselll", "palma"));
 
         AnchorPane pnMain = new AnchorPane();
         GridPane grid = new GridPane();
@@ -114,19 +109,9 @@ public class HelloApplication extends Application {
             public void handle(ActionEvent actionEvent) {
                 String username = tfUsername.getText();
                 String password = pfPassword.getText();
-                for (User user : users) {
-                    if (username.equals(user.username) && password.equals(user.password)) {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-                        try {
-                            Scene scene = new Scene(loader.load());
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-                actionTarget.setText("Invalid username/password");
+
+
+                actionTarget.setText("Wrong username/password");
                 actionTarget.setOpacity(1);
             }
         });
@@ -139,6 +124,26 @@ public class HelloApplication extends Application {
         };
         tfUsername.setOnKeyTyped(fieldChange);
         pfPassword.setOnKeyTyped(fieldChange);
+        Button btnRegister = new Button("Register");
+        btnRegister.setFont(Font.font(45));
+        HBox hbRegister = new HBox();
+        hbRegister.getChildren().add(btnRegister);
+        hbRegister.setAlignment(Pos.CENTER);
+        grid.add(hbRegister, 0, 4, 2, 1);
+
+        btnRegister.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("register.fxml"));
+                try {
+                    Scene scene = new Scene(loader.load());
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
 
         Scene scene = new Scene(pnMain, 700, 560);

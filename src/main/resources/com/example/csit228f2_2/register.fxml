@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.Register">
+   <children>
+      <VBox alignment="CENTER" layoutX="-2.0" layoutY="38.0" prefHeight="338.0" prefWidth="600.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+               <children>
+                  <Label text="Username: ">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="username" prefHeight="25.0" prefWidth="234.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="60.0" text="Password">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="password" prefHeight="25.0" prefWidth="235.0" />
+               </children>
+            </HBox>
+            <Button fx:id="registerAccount" mnemonicParsing="false" text="Register" />
+            <Button fx:id="back_to_login_btn" mnemonicParsing="false" text="Back to Log-in">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
