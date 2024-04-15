@@ -2,6 +2,7 @@ module com.example.csit228f2_2 {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires jdk.jconsole;
 
 
     opens com.example.csit228f2_2 to javafx.fxml;

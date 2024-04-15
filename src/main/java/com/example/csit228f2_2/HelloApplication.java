@@ -110,8 +110,21 @@ public class HelloApplication extends Application {
                 String username = tfUsername.getText();
                 String password = pfPassword.getText();
 
-
-                actionTarget.setText("Wrong username/password");
+                String status = Login.Login(username,password);
+                if(!status.equalsIgnoreCase("Login Failed")){
+                    tfUsername.setText("");
+                    pfPassword.setText("");
+                    MainPage.setUsername(username);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
+                    try {
+                        Scene scene = new Scene(loader.load());
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                actionTarget.setText(status);;
                 actionTarget.setOpacity(1);
             }
         });
@@ -124,6 +137,7 @@ public class HelloApplication extends Application {
         };
         tfUsername.setOnKeyTyped(fieldChange);
         pfPassword.setOnKeyTyped(fieldChange);
+
         Button btnRegister = new Button("Register");
         btnRegister.setFont(Font.font(45));
         HBox hbRegister = new HBox();
@@ -145,9 +159,32 @@ public class HelloApplication extends Application {
             }
         });
 
+        Button btnForgot= new Button("Forgot Password");
+        btnForgot.setFont(Font.font(45));
+        HBox hbForgot = new HBox();
+        hbForgot.getChildren().add(btnForgot);
+        hbForgot.setAlignment(Pos.CENTER);
+        grid.add(hbForgot, 0, 5, 2, 1);
+
+        btnForgot.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ForgotPassword.fxml"));
+                try {
+                    Scene scene = new Scene(loader.load());
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         Scene scene = new Scene(pnMain, 700, 560);
         stage.setScene(scene);
+        ForgotPassword.getLogInScene(scene);
+        MainPage.setLogInScene(scene,stage);
+        Register.getLogInScene(scene);
         stage.show();
     }
 }

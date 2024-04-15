@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login {
-    public String Login(String username, String password) {
+    public static String Login(String username, String password) {
         try(Connection connection = MYSQLConnection.getConnection()){
-            String login_query = "SELECT * WHERE username = ? AND password = ?";
+            String login_query = "SELECT * FROM users WHERE username = ? AND password = ?";
             PreparedStatement statement = connection.prepareStatement(login_query);
             statement.setString(1,username);
             statement.setString(2,password);
@@ -21,11 +21,11 @@ public class Login {
                     return result.getString("username");
                 }
             } catch (SQLException e) {
-                return "Invalid";
+                return "Login Failed";
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return "Invalid";
+        return "Login Failed";
     }
 }
