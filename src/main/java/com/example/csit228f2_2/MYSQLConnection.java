@@ -7,22 +7,24 @@ import java.sql.*;
 public class MYSQLConnection {
 
     private static String url = "jdbc:mysql://localhost:3306/laurondb";
-    private static String username ="ArdelTiocoJeffLauron";
-    private static String password = "123456";
+    private static String username ="root";
+    private static String password = "";
     public static Connection getConnection(){
         Connection connection = null;
-
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url,username,password);
             System.out.println("CONNECTED TO DATABASE");
-
         } catch (ClassNotFoundException e) {
-            e.getMessage();
+            e.printStackTrace();
         }
         catch (SQLException e){
-            e.getMessage();
+            e.printStackTrace();
         }
         return connection;
+    }
+
+    public static void main(String[] args) {
+        getConnection();
     }
 }

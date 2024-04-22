@@ -50,7 +50,6 @@ public class ForgotPassword implements Initializable {
         reset_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("ResetBTNCVLICKED");
                 String username = forgotUsername.getText();
                 String password = forgotPassword.getText();
                 if(username.isEmpty() || password.isEmpty()){
@@ -79,7 +78,9 @@ public class ForgotPassword implements Initializable {
                     }
 
                 }
-                catch (SQLException e){}
+                catch (SQLException e){
+                    e.printStackTrace();
+                }
             }
         });
     }
