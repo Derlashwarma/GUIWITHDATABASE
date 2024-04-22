@@ -31,10 +31,19 @@
                               <TextField fx:id="username_login" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="383.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="383.0">
                            <children>
                               <Label text="Password" />
-                              <PasswordField fx:id="password_login" />
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox fx:id="password_container" prefHeight="26.0" prefWidth="292.0">
+                                       <children>
+                                          <PasswordField fx:id="password_login" accessibleRole="TEXT_FIELD" prefHeight="26.0" prefWidth="291.0" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="show_password_btn" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="Show" />
+                                 </children>
+                              </HBox>
                               <Button fx:id="forget_password" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" styleClass="forget_password" stylesheets="@styles.css" text="Forget Password" textFill="#0695dc" />
                               <Label fx:id="error_message" prefHeight="18.0" prefWidth="342.0" textFill="#dc0e0e">
                                  <padding>
