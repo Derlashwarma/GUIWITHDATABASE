@@ -7,40 +7,54 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.Register">
    <children>
-      <VBox alignment="CENTER" layoutX="-2.0" layoutY="38.0" prefHeight="338.0" prefWidth="600.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+      <SplitPane dividerPositions="0.6336898395721924" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Label text="Username: ">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="username" prefHeight="25.0" prefWidth="234.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
+                  <VBox alignment="CENTER" layoutX="161.0" layoutY="85.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="336.0">
+                           <children>
+                              <Label text="Username" />
+                              <TextField fx:id="username_register" />
+                           </children></VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Password" />
+                              <PasswordField fx:id="password_register" />
+                           </children>
+                        </VBox>
+                        <Label fx:id="register_error_message" prefHeight="18.0" prefWidth="335.0" textFill="#ef0e0e" />
+                        <Button fx:id="registerAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="236.0" text="Register">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="register_right_container" stylesheets="@styles.css" SplitPane.resizableWithParent="false">
                <children>
-                  <Label prefHeight="24.0" prefWidth="60.0" text="Password">
+                  <Label layoutX="82.0" layoutY="122.0" text="REGISTER" textFill="#ece3e3" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="Segoe UI Bold" size="38.0" />
                      </font>
-                  </Label>
-                  <PasswordField fx:id="password" prefHeight="25.0" prefWidth="235.0" />
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <Button fx:id="back_to_login_btn" layoutX="82.0" layoutY="331.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="197.0" text="Return to Login" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font name="Segoe UI Semilight" size="12.0" />
+                     </font>
+                  </Button>
                </children>
-            </HBox>
-            <Button fx:id="registerAccount" mnemonicParsing="false" text="Register" />
-            <Button fx:id="back_to_login_btn" mnemonicParsing="false" text="Back to Log-in">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <Label fx:id="error_message">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding></AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>

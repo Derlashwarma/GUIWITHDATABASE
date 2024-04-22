@@ -3,14 +3,18 @@ package com.example.csit228f2_2;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +46,11 @@ public class ForgotPassword implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Stage stage = (Stage) reset_message.getScene().getWindow();
-                stage.setScene(scene);
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("login-page.fxml"))));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 stage.show();
             }
         });
@@ -71,12 +79,13 @@ public class ForgotPassword implements Initializable {
                         int updateResult = updateStatement.executeUpdate();
                         if(updateResult > 0){
                             reset_message.setText("Password Change Successful");
+                            reset_message.setTextFill(Paint.valueOf("green"));
                         }
                     }
-                    else{
+                    else {
                         reset_message.setText("No username found");
+                        reset_message.setTextFill(Paint.valueOf("red"));
                     }
-
                 }
                 catch (SQLException e){
                     e.printStackTrace();

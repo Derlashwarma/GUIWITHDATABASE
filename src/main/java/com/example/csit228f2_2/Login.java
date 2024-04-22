@@ -7,25 +7,26 @@ import java.sql.SQLException;
 
 public class Login {
     public static String Login(String username, String password) {
-        try(Connection connection = MYSQLConnection.getConnection()){
+        try (Connection connection = MYSQLConnection.getConnection()) {
+            connection.setAutoCommit(false);
             String login_query = "SELECT * FROM users WHERE username = ? AND password = ?";
-            PreparedStatement statement = connection.prepareStatement(login_query);
-            statement.setString(1,username);
-            statement.setString(2,password);
+            try (PreparedStatement statement = connection.prepareStatement(login_query)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
 
-            ResultSet result = statement.executeQuery();
-            try{
-                result.next();
-                int id = result.getInt("id");
-                if(id != 0){
-                    return result.getString("username");
+                String res = null;
+                try (ResultSet result = statement.executeQuery()) {
+                    if (result.next()) {
+                        res = result.getString("username");
+                    } else {
+                        res = null;
+                    }
+                    connection.commit();
+                    return res;
                 }
-            } catch (SQLException e) {
-                return "Login Failed";
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
-        return "Login Failed";
     }
 }

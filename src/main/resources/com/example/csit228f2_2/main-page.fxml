@@ -1,55 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.MainPage">
    <children>
-      <VBox layoutX="7.0" layoutY="7.0" prefHeight="385.0" prefWidth="586.0">
+      <VBox prefHeight="385.0" prefWidth="586.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <HBox fx:id="welcome_Hbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="welcome_Hbox" alignment="CENTER" prefHeight="62.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="welcome_message" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="414.0" text="Welcome, " textAlignment="CENTER">
+                  <Label fx:id="welcome_message" contentDisplay="CENTER" prefHeight="40.0" prefWidth="414.0" text="Welcome, " textAlignment="CENTER">
                      <font>
-                        <Font name="Candara" size="20.0" />
+                        <Font name="Roboto Thin" size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="return_login" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" text="Logout" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="586.0">
-               <children>
-                  <Button fx:id="delete_user" mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" text="Delete User">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
+                  <Button fx:id="return_login" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" text="Logout">
+                     <font>
+                        <Font name="JetBrains Mono Light" size="12.0" />
+                     </font>
                   </Button>
-                  <TextField fx:id="delete_username" prefHeight="37.0" prefWidth="299.0">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children></HBox>
-            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="586.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <Label fx:id="delete_status" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="31.0" prefWidth="302.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="199.0" prefWidth="586.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <Label alignment="TOP_RIGHT" prefHeight="166.0" prefWidth="66.0" text="Users:">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="username_box" prefHeight="174.0" prefWidth="490.0" />
-               </children></HBox>
          </children>
       </VBox>
    </children>

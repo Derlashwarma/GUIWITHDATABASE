@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.LoginPage">
+   <children>
+      <SplitPane dividerPositions="0.35419630156472254" layoutX="14.0" layoutY="21.0" prefHeight="367.0" prefWidth="564.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane id="login-left-container" fx:id="left_login_container" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="login-left-container" stylesheets="@styles.css" SplitPane.resizableWithParent="false">
+               <children>
+                  <Label layoutX="14.0" layoutY="19.0" prefHeight="86.0" prefWidth="164.0" text="SIGN IN" textFill="#ececec">
+                     <font>
+                        <Font name="Segoe UI Bold" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="383.0">
+                           <padding>
+                              <Insets left="20.0" right="20.0" />
+                           </padding>
+                           <children>
+                              <Label alignment="CENTER" text="Username" />
+                              <TextField fx:id="username_login" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="383.0">
+                           <children>
+                              <Label text="Password" />
+                              <PasswordField fx:id="password_login" />
+                              <Button fx:id="forget_password" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" styleClass="forget_password" stylesheets="@styles.css" text="Forget Password" textFill="#0695dc" />
+                              <Label fx:id="error_message" prefHeight="18.0" prefWidth="342.0" textFill="#dc0e0e">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="20.0" right="20.0" />
+                           </padding>
+                        </VBox>
+                        <HBox alignment="CENTER" prefHeight="74.0" prefWidth="383.0">
+                           <children>
+                              <Button fx:id="login_btn" mnemonicParsing="false" prefHeight="45.0" prefWidth="276.0" text="LOGIN" />
+                           </children></HBox>
+                        <HBox alignment="CENTER" prefHeight="51.0" prefWidth="383.0">
+                           <children>
+                              <Button fx:id="register_btn" mnemonicParsing="false" prefHeight="45.0" prefWidth="276.0" text="REGISTER" />
+                           </children>
+                           <padding>
+                              <Insets left="20.0" right="20.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

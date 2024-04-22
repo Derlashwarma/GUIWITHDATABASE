@@ -26,36 +26,34 @@ public class Register implements Initializable {
     Button registerAccount;
 
     @FXML
-    TextField username;
+    TextField username_register;
     @FXML
-    PasswordField password;
+    PasswordField password_register;
     @FXML
-    Label error_message;
-
-    public static Scene scene;
-
-    public static void getLogInScene(Scene scene){
-        Register.scene = scene;
-    }
+    Label register_error_message;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         back_to_login_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Stage stage = (Stage) password.getScene().getWindow();
-                stage.setScene(scene);
+                Stage stage = (Stage) password_register.getScene().getWindow();
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("login-page.fxml"))));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 stage.show();
             }
         });
         registerAccount.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                String u = username.getText();
-                String p = password.getText();
+                String u = username_register.getText();
+                String p = password_register.getText();
 
                 if(u.isEmpty() || p.isEmpty()){
-                    error_message.setText("Please Enter Valid Input");
+                    register_error_message.setText("Please Enter Valid Input");
                     return;
                 }
 
@@ -66,7 +64,7 @@ public class Register implements Initializable {
                     ResultSet rs = check_username.executeQuery();
 
                     if (rs.next()) {
-                        error_message.setText("Username is already taken");
+                        register_error_message.setText("Username is already taken");
                     } else {
                         String registerQuery = "INSERT INTO users(username, password) VALUES (?, ?)";
                         PreparedStatement register = connection.prepareStatement(registerQuery);
@@ -75,7 +73,7 @@ public class Register implements Initializable {
 
                         int register_res = register.executeUpdate();
                         if (register_res > 0) {
-                            error_message.setText("Registration Successful");
+                            register_error_message.setText("Registration Successful");
                         }
                     }
                 } catch (SQLException e) {}

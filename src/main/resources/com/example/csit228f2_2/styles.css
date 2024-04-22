@@ -1,3 +1,18 @@
 .root {
     -fx-background-color: black;
 }
+.login-left-container {
+    -fx-background-color: black;
+}
+.forget_password{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+.register_right_container {
+    -fx-background-color: #800000;
+}
+.top_forget_password{
+    -fx-background-color:  #832000;
+}
