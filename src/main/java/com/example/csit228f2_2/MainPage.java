@@ -1,17 +1,16 @@
 package com.example.csit228f2_2;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
@@ -22,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class MainPage implements Initializable {
     private static String username;
+    private static int user_id;
     @FXML
     Label welcome_message;
     private static Scene scene;
@@ -34,9 +34,13 @@ public class MainPage implements Initializable {
     Label username_box;
     @FXML
     VBox main_page_container;
+    @FXML
+    Label status_box;
 
     public static void setUsername(String username){
         MainPage.username = username;
+        MainPage.user_id = MYSQLConnection.getUserId(username);
+        System.out.println("User ID is: " + user_id);
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,31 +59,55 @@ public class MainPage implements Initializable {
                 }
             }
         });
+//        TextArea textArea2 = new TextArea("HELLOOOOO");
+//        textArea2.setWrapText(true);
+//        textArea2.setPrefWidth(450);
+//        textArea2.prefHeightProperty().bind(textArea2.heightProperty());
+//        HBox hbox2 = new HBox();
+//        Button delete_btn2 = new Button("Del");
+//        Button change_btn2 = new Button("change");
+//        hbox2.getChildren().addAll(textArea2,delete_btn2,change_btn2);
+//        main_page_container.getChildren().add(hbox2);
+        try (Connection connection = MYSQLConnection.getConnection()) {
+            String query = "SELECT * FROM user_logs WHERE user_id = ? AND is_active = 1;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1,user_id);
 
-        ResultSet resultSet;
-        try(Connection connection = MYSQLConnection.getConnection()) {
-            Statement statement = connection.createStatement();
-            String query = "SELECT * FROM users;";
-            resultSet = statement.executeQuery(query);
-            int counter = 1;
-            while(resultSet.next()) {
-                Label label = new Label(resultSet.getString("username").toString());
-                HBox hbox = new HBox();
-                hbox.getChildren().add(label);
-                Button button = new Button("This is the Button for user with user id " + resultSet.getInt("id"));
-                button.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        System.out.println("Hello");
-                        //RemoveUser(resultSet.getInt("id"));
-                    }
-                });
-                hbox.getChildren().add(button);
-                main_page_container.getChildren().add(hbox);
-                counter++;
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    final String message = resultSet.getString("log");
+                    final int log_id = resultSet.getInt("log_id");
+
+                    Platform.runLater(() -> {
+                        TextArea label = new TextArea(message);
+                        label.setWrapText(true);
+                        label.setPrefWidth(450);
+                        label.prefHeightProperty().bind(label.heightProperty());
+
+                        HBox hbox = new HBox();
+                        Button remove_button = new Button("Del");
+                        remove_button.setOnAction(event -> {
+                            String res = Remove.removeLog(log_id);
+                            status_box.setText(res);
+                            if(res.contains("successful")) {
+                                status_box.setTextFill(Paint.valueOf("green"));
+                            }
+                            else {
+                                status_box.setTextFill(Paint.valueOf("red"));
+                            }
+                        });
+
+                        Button update_button = new Button("Update");
+                        update_button.setOnAction(event -> {
+                            String res = Update.updateLog(label,log_id);
+                        });
+
+                        hbox.getChildren().addAll(label,update_button,remove_button);
+                        main_page_container.getChildren().add(hbox);
+                    });
+                }
             }
-
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

@@ -24,7 +24,24 @@ public class MYSQLConnection {
         return connection;
     }
 
-    public static void main(String[] args) {
-        getConnection();
+    public static int getUserId(String username) {
+        try(Connection conn = getConnection()) {
+            String query = "SELECT id FROM users WHERE username = ?";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1,username);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("id");
+                } else {
+                    return -1;
+                }
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
+
 }

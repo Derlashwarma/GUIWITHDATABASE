@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -22,10 +23,21 @@
                   </Button>
                </children>
             </HBox>
+            <Label fx:id="status_box" prefHeight="18.0" prefWidth="376.0" textFill="#df0606">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
             <ScrollPane prefHeight="326.0" prefWidth="600.0">
                <content>
-                  <VBox fx:id="main_page_container" prefHeight="324.0" prefWidth="598.0" />
+                  <VBox fx:id="main_page_container" alignment="TOP_CENTER" prefHeight="324.0" prefWidth="598.0">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding></VBox>
                </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </ScrollPane>
          </children>
       </VBox>
