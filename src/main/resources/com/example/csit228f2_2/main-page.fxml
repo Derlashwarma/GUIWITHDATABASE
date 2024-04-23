@@ -11,12 +11,12 @@
          <children>
             <HBox fx:id="welcome_Hbox" alignment="CENTER" prefHeight="62.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="welcome_message" contentDisplay="CENTER" prefHeight="40.0" prefWidth="414.0" text="Welcome, " textAlignment="CENTER">
+                  <Label fx:id="welcome_message" contentDisplay="CENTER" prefHeight="49.0" prefWidth="414.0" text="Welcome, " textAlignment="CENTER">
                      <font>
                         <Font name="Roboto Thin" size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="return_login" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" text="Logout">
+                  <Button fx:id="return_login" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Logout">
                      <font>
                         <Font name="JetBrains Mono Light" size="12.0" />
                      </font>
@@ -28,11 +28,29 @@
                   <Insets left="20.0" />
                </padding>
             </Label>
-            <ScrollPane prefHeight="326.0" prefWidth="600.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="600.0">
+               <children>
+                  <TextArea fx:id="log" prefHeight="76.0" prefWidth="433.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin></TextArea>
+                  <Button fx:id="insert_log_btn" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Enter Log">
+                     <font>
+                        <Font name="JetBrains Mono Light" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding></HBox>
+            <ScrollPane prefHeight="242.0" prefWidth="600.0">
                <content>
-                  <VBox fx:id="main_page_container" alignment="TOP_CENTER" prefHeight="324.0" prefWidth="598.0">
+                  <VBox fx:id="main_page_container" alignment="TOP_CENTER" prefHeight="242.0" prefWidth="581.0">
                      <padding>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets left="10.0" right="8.0" top="10.0" />
                      </padding></VBox>
                </content>
                <VBox.margin>

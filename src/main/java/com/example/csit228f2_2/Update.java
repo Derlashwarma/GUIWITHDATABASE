@@ -18,7 +18,7 @@ public class Update {
             int result = statement.executeUpdate();
             if(result > 0) {
                 connection.commit();
-                return "success";
+                return "Update success";
             }
         }
         catch (SQLException e) {

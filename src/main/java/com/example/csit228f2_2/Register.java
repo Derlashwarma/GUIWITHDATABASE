@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -65,6 +66,7 @@ public class Register implements Initializable {
 
                     if (rs.next()) {
                         register_error_message.setText("Username is already taken");
+                        register_error_message.setTextFill(Paint.valueOf("red"));
                     } else {
                         String registerQuery = "INSERT INTO users(username, password) VALUES (?, ?)";
                         PreparedStatement register = connection.prepareStatement(registerQuery);
@@ -74,6 +76,7 @@ public class Register implements Initializable {
                         int register_res = register.executeUpdate();
                         if (register_res > 0) {
                             register_error_message.setText("Registration Successful");
+                            register_error_message.setTextFill(Paint.valueOf("Green"));
                         }
                     }
                 } catch (SQLException e) {}

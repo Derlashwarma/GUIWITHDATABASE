@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -24,8 +26,6 @@ public class MainPage implements Initializable {
     private static int user_id;
     @FXML
     Label welcome_message;
-    private static Scene scene;
-    private static Stage stage;
     @FXML
     Button return_login;
     @FXML
@@ -36,7 +36,10 @@ public class MainPage implements Initializable {
     VBox main_page_container;
     @FXML
     Label status_box;
-
+    @FXML
+    TextArea log;
+    @FXML
+    Button insert_log_btn;
     public static void setUsername(String username){
         MainPage.username = username;
         MainPage.user_id = MYSQLConnection.getUserId(username);
@@ -59,15 +62,24 @@ public class MainPage implements Initializable {
                 }
             }
         });
-//        TextArea textArea2 = new TextArea("HELLOOOOO");
-//        textArea2.setWrapText(true);
-//        textArea2.setPrefWidth(450);
-//        textArea2.prefHeightProperty().bind(textArea2.heightProperty());
-//        HBox hbox2 = new HBox();
-//        Button delete_btn2 = new Button("Del");
-//        Button change_btn2 = new Button("change");
-//        hbox2.getChildren().addAll(textArea2,delete_btn2,change_btn2);
-//        main_page_container.getChildren().add(hbox2);
+        insert_log_btn.setOnAction(event -> {
+            String logText = log.getText();
+            String insert_status = InsertRecord.insertRecord(logText,user_id);
+            status_box.setText(insert_status);
+            if(insert_status.contains("Successfully")){
+                status_box.setTextFill(Paint.valueOf("green"));
+            }
+            else {
+                status_box.setTextFill(Paint.valueOf("red"));
+            }
+            log.clear();
+            reload(main_page_container, status_box);
+        });
+
+        reload(main_page_container,status_box);
+    }
+    private static void reload(VBox main_page_container, Label status_box) {
+        main_page_container.getChildren().clear();
         try (Connection connection = MYSQLConnection.getConnection()) {
             String query = "SELECT * FROM user_logs WHERE user_id = ? AND is_active = 1;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -95,13 +107,23 @@ public class MainPage implements Initializable {
                             else {
                                 status_box.setTextFill(Paint.valueOf("red"));
                             }
+                            reload(main_page_container,status_box);
                         });
 
                         Button update_button = new Button("Update");
                         update_button.setOnAction(event -> {
                             String res = Update.updateLog(label,log_id);
+                            status_box.setText(res);
+                            if(res.contains("success")) {
+                                status_box.setTextFill(Paint.valueOf("green"));
+                            }
+                            else {
+                                status_box.setTextFill(Paint.valueOf("red"));
+                            }
+                            reload(main_page_container, status_box);
                         });
-
+                        hbox.setAlignment(Pos.CENTER);
+                        hbox.setMargin(update_button,new Insets(5));
                         hbox.getChildren().addAll(label,update_button,remove_button);
                         main_page_container.getChildren().add(hbox);
                     });

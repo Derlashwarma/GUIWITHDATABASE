@@ -13,8 +13,8 @@ public class InsertRecord {
             PreparedStatement statement = connection.prepareStatement(insert_query);
             statement.setInt(1,user_id);
             statement.setString(2,record);
-            ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()) {
+            int result_query = statement.executeUpdate();
+            if(result_query > 0) {
                 connection.commit();
                 return "Inserted Successfully";
             }
