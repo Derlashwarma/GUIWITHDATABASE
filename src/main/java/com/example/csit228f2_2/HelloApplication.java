@@ -19,6 +19,6 @@ public class HelloApplication extends Application{
         stage.setResizable(false);
         stage.show();
         CreateTable.create_users_table();
-        CreateTable.create_user_images_table();
+//        CreateTable.create_user_images_table();
     }
 }

@@ -8,8 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
@@ -30,6 +32,8 @@ public class MainPage implements Initializable {
     HBox welcome_Hbox;
     @FXML
     Label username_box;
+    @FXML
+    VBox main_page_container;
 
     public static void setUsername(String username){
         MainPage.username = username;
@@ -51,5 +55,32 @@ public class MainPage implements Initializable {
                 }
             }
         });
+
+        ResultSet resultSet;
+        try(Connection connection = MYSQLConnection.getConnection()) {
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM users;";
+            resultSet = statement.executeQuery(query);
+            int counter = 1;
+            while(resultSet.next()) {
+                Label label = new Label(resultSet.getString("username").toString());
+                HBox hbox = new HBox();
+                hbox.getChildren().add(label);
+                Button button = new Button("This is the Button for user with user id " + resultSet.getInt("id"));
+                button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        System.out.println("Hello");
+                        //RemoveUser(resultSet.getInt("id"));
+                    }
+                });
+                hbox.getChildren().add(button);
+                main_page_container.getChildren().add(hbox);
+                counter++;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

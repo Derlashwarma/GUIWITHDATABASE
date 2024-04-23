@@ -26,4 +26,25 @@ public class CreateTable {
             e.printStackTrace();
         }
     }
+//    public static void create_user_images_table() {
+//        try(Connection connection = MYSQLConnection.getConnection()){
+//            connection.setAutoCommit(false);
+//            Statement statement = connection.createStatement();
+//            String create_user_image_table_query = "CREATE TABLE user_images" +
+//                    "(image_id INT NOT NULL AUTO_INCREMENT ," +
+//                    " user_id INT NOT NULL , " +
+//                    "image BLOB NOT NULL , " +
+//                    "is_active BOOLEAN NOT NULL DEFAULT TRUE , " +
+//                    "PRIMARY KEY (image_id)) ENGINE = InnoDB;";
+//            int create_result = statement.executeUpdate(create_user_image_table_query);
+//
+//            if(create_result > 1) {
+//                System.out.println("TABLE CREATED SUCCESSFULLY");
+//                connection.commit();
+//            }
+//        }
+//        catch (SQLException e){
+//            System.out.println("TABLE HAS ALREADY EXISTED");
+//        }
+//    }
 }
